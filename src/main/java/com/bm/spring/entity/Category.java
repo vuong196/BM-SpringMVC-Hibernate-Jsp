@@ -23,42 +23,42 @@ public class Category {
 
 	public Set<Book> getCategoryBookSet() {
 
-		return categoryBookSet;
+		return _categoryBookSet;
 	}
 
 	public String getCategoryId() {
 
-		return categoryId;
+		return _categoryId;
 	}
 
 	public String getCategoryName() {
 
-		return categoryName;
+		return _categoryName;
 	}
 
 	public void setCategoryBookSet(Set<Book> categoryBookSet) {
 
-		this.categoryBookSet = categoryBookSet;
+		this._categoryBookSet = categoryBookSet;
 	}
 
 	public void setCategoryId(String categoryId) {
 
-		this.categoryId = categoryId;
+		this._categoryId = categoryId;
 	}
 
 	public void setCategoryName(String categoryName) {
 
-		this.categoryName = categoryName;
+		this._categoryName = categoryName;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "_bookCategorySet")
-	private Set<Book> categoryBookSet = new HashSet<>(0);
+	private Set<Book> _categoryBookSet = new HashSet<>(0);
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "category_id")
-	private String categoryId;
+	private String _categoryId;
 
 	@Column(name = "category_name", length = 50, nullable = false)
-	private String categoryName;
+	private String _categoryName;
 }

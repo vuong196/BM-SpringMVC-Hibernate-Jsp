@@ -25,61 +25,59 @@ public class Book {
 
 	public Author getBookAuthor() {
 
-		return bookAuthor;
+		return _bookAuthor;
 	}
 
 	public Set<Category> getBookCategorySet() {
 
-		return bookCategorySet;
+		return _bookCategorySet;
 	}
 
-	public int getBookId() {
+	public int get_bookId() {
 
-		return bookId;
+		return _bookId;
 	}
 
 	public String getBookName() {
 
-		return bookName;
+		return _bookName;
 	}
 
 	public void setBookAuthor(Author bookAuthor) {
 
-		this.bookAuthor = bookAuthor;
+		this._bookAuthor = bookAuthor;
 	}
 
 	public void setBookCategorySet(Set<Category> bookCategorySet) {
 
-		this.bookCategorySet = bookCategorySet;
+		this._bookCategorySet = bookCategorySet;
 	}
 
 	public void setBookId(int bookId) {
 
-		this.bookId = bookId;
+		this._bookId = bookId;
 	}
 
 	public void setBookName(String bookName) {
 
-		this.bookName = bookName;
+		this._bookName = bookName;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "book_id")
-	private int bookId;
+	private int _bookId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "author_id", nullable = false)
-	private Author bookAuthor;
+	private Author _bookAuthor;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "book_category", catalog = "bookmanagement", joinColumns = {
-		@JoinColumn(name = "book_id", nullable = false, updatable = false)
-	}, inverseJoinColumns = {
-		@JoinColumn(name = "category_id", nullable = false, updatable = false)
-	})
-	private Set<Category> bookCategorySet = new HashSet<>(0);
+		@JoinColumn(name = "book_id", nullable = false, updatable = false)}, inverseJoinColumns = {
+			@JoinColumn(name = "category_id", nullable = false, updatable = false)})
+	private Set<Category> _bookCategorySet = new HashSet<>(0);
 
 	@Column(name = "book_name", length = 50, nullable = false)
-	private String bookName;
+	private String _bookName;
 }
