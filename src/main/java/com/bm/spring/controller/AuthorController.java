@@ -19,7 +19,6 @@ public class AuthorController {
 	@PostMapping("/add")
 	public String addAuthor(@ModelAttribute("author") Author author) throws Exception {
 
-		System.out.println(author.getAuthorName());
 		_authorService.addAuthor(author);
 		return "redirect:/author/list";
 	}
@@ -50,7 +49,6 @@ public class AuthorController {
 	public String showFormForAdd(Model model) throws Exception {
 
 		Author author = new Author();
-		System.out.println(author.getAuthorId());
 		model.addAttribute("author", author);
 		return "author-add";
 	}

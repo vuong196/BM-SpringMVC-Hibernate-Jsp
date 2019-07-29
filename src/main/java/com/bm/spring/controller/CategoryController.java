@@ -19,7 +19,6 @@ public class CategoryController {
 	@PostMapping("/add")
 	public String addCategory(@ModelAttribute("category") Category category) throws Exception {
 
-		System.out.println(category.getCategoryName());
 		_categoryService.addCategory(category);
 		return "redirect:/category/list";
 	}
@@ -50,7 +49,6 @@ public class CategoryController {
 	public String showFormForAdd(Model model) throws Exception {
 
 		Category category = new Category();
-		System.out.println(category.getCategoryId());
 		model.addAttribute("category", category);
 		return "category-add";
 	}
