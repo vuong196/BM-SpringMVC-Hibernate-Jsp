@@ -16,7 +16,11 @@ import javax.persistence.Table;
 public class Author {
 
 	public Author() {
+	}
 
+	public Set<Book> getAuthorBookSet() {
+
+		return _authorBookSet;
 	}
 
 	public int getAuthorId() {
@@ -29,25 +33,23 @@ public class Author {
 		return _authorName;
 	}
 
-	public Set<Book> getAuthorBookSet() {
+	public void setAuthorBookSet(Set<Book> bookSet) {
 
-		return _authorBookSet;
+		_authorBookSet = bookSet;
 	}
 
 	public void setAuthorId(int authorId) {
 
-		this._authorId = authorId;
+		_authorId = authorId;
 	}
 
 	public void setAuthorName(String authorName) {
 
-		this._authorName = authorName;
+		_authorName = authorName;
 	}
 
-	public void setAuthorBookSet(Set<Book> bookSet) {
-
-		this._authorBookSet = bookSet;
-	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "_bookAuthor")
+	private Set<Book> _authorBookSet = new HashSet<>(0);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +58,4 @@ public class Author {
 
 	@Column(name = "author_name", length = 50, nullable = false)
 	private String _authorName;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "_bookAuthor")
-	private Set<Book> _authorBookSet = new HashSet<>(0);
 }

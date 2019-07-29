@@ -20,39 +20,6 @@ import com.bm.spring.service.CategoryService;
 @RequestMapping("/book")
 public class BookController {
 
-	@Autowired
-	private BookService _bookService;
-
-	@Autowired
-	private CategoryService _categoryService;
-
-	@Autowired
-	private AuthorService _authorService;
-
-	@GetMapping("/list")
-	public String getBookList(Model model) throws Exception {
-
-		List<Book> bookList = this._bookService.getBookList();
-		List<Author> authorList = this._authorService.getAuthorList();
-		List<Category> categoryList = this._categoryService.getCategoryList();
-		model.addAttribute("bookList", bookList);
-		model.addAttribute("authorList", authorList);
-		model.addAttribute("categoryList", categoryList);
-		return "book-list";
-	}
-
-	@GetMapping("/showForm")
-	public String showFormForAdd(Model model) throws Exception {
-
-		List<Author> authorList = this._authorService.getAuthorList();
-		List<Category> categoryList = this._categoryService.getCategoryList();
-		Book book = new Book();
-		model.addAttribute("authorList", authorList);
-		model.addAttribute("categoryList", categoryList);
-		model.addAttribute("book", book);
-		return "book-add";
-	}
-
 	@PostMapping("/add")
 	public String addBook(@ModelAttribute("book") Book book) throws Exception {
 
@@ -60,29 +27,62 @@ public class BookController {
 		return "redirect:/book/list";
 	}
 
-	@PostMapping("/update")
-	public String updateBook(@ModelAttribute("book") Book book) throws Exception {
+	@GetMapping("/delete")
+	public String deleteCustomer(@RequestParam("id") int id) throws Exception {
 
-		_bookService.editBook(book);
+		_bookService.deleteBook(id);
 		return "redirect:/book/list";
+	}
+
+	@GetMapping("/list")
+	public String getBookList(Model model) throws Exception {
+
+		List<Book> bookList = _bookService.getBookList();
+		List<Author> authorList = _authorService.getAuthorList();
+		List<Category> categoryList = _categoryService.getCategoryList();
+		model.addAttribute("bookList", bookList);
+		model.addAttribute("authorList", authorList);
+		model.addAttribute("categoryList", categoryList);
+		return "book-list";
+	}
+
+	@PostMapping("/update")
+	@GetMapping("/showForm")
+	public String showFormForAdd(Model model) throws Exception {
+
+		List<Author> authorList = _authorService.getAuthorList();
+		List<Category> categoryList = _categoryService.getCategoryList();
+		Book book = new Book();
+		model.addAttribute("authorList", authorList);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("book", book);
+		return "book-add";
 	}
 
 	@GetMapping("/updateForm")
 	public String showFormForUpdate(@RequestParam("id") int id, Model model) throws Exception {
 
-		List<Author> authorList = this._authorService.getAuthorList();
-		List<Category> categoryList = this._categoryService.getCategoryList();
-		Book book = this._bookService.getBookById(id);
+		List<Author> authorList = _authorService.getAuthorList();
+		List<Category> categoryList = _categoryService.getCategoryList();
+		Book book = _bookService.getBookById(id);
 		model.addAttribute("authorList", authorList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("book", book);
 		return "book-edit";
 	}
 
-	@GetMapping("/delete")
-	public String deleteCustomer(@RequestParam("id") int id) throws Exception {
+	public String updateBook(@ModelAttribute("book") Book book) throws Exception {
 
-		this._bookService.deleteBook(id);
+		_bookService.editBook(book);
 		return "redirect:/book/list";
 	}
+
+	@Autowired
+	private AuthorService _authorService;
+
+	@Autowired
+	private BookService _bookService;
+
+	@Autowired
+	private CategoryService _categoryService;
 }

@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.bm.spring"})
+@ComponentScan(basePackages = {
+	"com.bm.spring"
+})
 public class AppContext {
 
 	@Bean
@@ -38,7 +40,22 @@ public class AppContext {
 		return transactionManager;
 	}
 
-	private Properties hibernateProperties() {
+	@Bean
+	public LocalSessionFactoryBean sessionFactory() {
+
+		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+		sessionFactory.setDataSource(dataSource());
+		sessionFactory.setPackagesToScan(new String[] {
+			"com.bm.spring.entity"
+		});
+		sessionFactory.setHibernateProperties(_hibernateProperties());
+		return sessionFactory;
+	}
+
+	@Autowired
+	private Environment _environment;
+	
+	private Properties _hibernateProperties() {
 
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", _environment.getRequiredProperty("hibernate.dialect"));
@@ -47,17 +64,4 @@ public class AppContext {
 		properties.put("hibernate.hbm2ddl.auto", _environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
 		return properties;
 	}
-
-	@Bean
-	public LocalSessionFactoryBean sessionFactory() {
-
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] {"com.bm.spring.entity"});
-		sessionFactory.setHibernateProperties(hibernateProperties());
-		return sessionFactory;
-	}
-
-	@Autowired
-	private Environment _environment;
 }
