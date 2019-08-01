@@ -2,7 +2,9 @@
 package com.bm.spring.config;
 
 import java.util.Properties;
+
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,12 +15,11 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 @Configuration
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {
-	"com.bm.spring"
-})
+@ComponentScan(basePackages = { "com.bm.spring" })
 public class AppContext {
 
 	@Bean
@@ -45,16 +46,14 @@ public class AppContext {
 
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] {
-			"com.bm.spring.entity"
-		});
+		sessionFactory.setPackagesToScan(new String[] { "com.bm.spring.entity" });
 		sessionFactory.setHibernateProperties(_hibernateProperties());
 		return sessionFactory;
 	}
 
 	@Autowired
 	private Environment _environment;
-	
+
 	private Properties _hibernateProperties() {
 
 		Properties properties = new Properties();
