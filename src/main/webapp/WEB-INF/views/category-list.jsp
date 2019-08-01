@@ -4,10 +4,9 @@
 <html>
 <head>
 <title>Category Management</title>
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
- rel="stylesheet">
-<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<link href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />" rel="stylesheet">
+<script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" />"></script>
+<script src="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" />"></script>
 </head>
 <body>
 	<div class="container">
@@ -15,7 +14,7 @@
 			<h2>Category Management</h2>
 			<hr />
 			<input type="button" value="Add category"
-				onclick="window.location.href='showForm'; return false;"
+				onclick="window.location.href='/category/add/form'; return false;"
 				class="btn btn-primary" />
 			<br/><br/>
 			<div class="panel panel-info">
@@ -32,7 +31,7 @@
 							<c:forEach var="category" items="${categoryList}">
 							
 								<!-- construct an "update" link with customer id -->
-								<c:url var="updateLink" value="/category/editForm">
+								<c:url var="updateLink" value="/category/update/form">
 									<c:param name="id" value="${category.categoryId}" />
 								</c:url>
 	
@@ -50,6 +49,7 @@
 								</tr>
 							</c:forEach>
 						</table>
+						<a href="/">Back to Homepage</a>
 					</div>
 				</div>
 			</div>

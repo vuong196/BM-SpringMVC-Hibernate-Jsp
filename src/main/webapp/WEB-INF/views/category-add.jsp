@@ -7,27 +7,28 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Category - Book MANAGEMENT</title>
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
- rel="stylesheet">
-<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<link href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />" rel="stylesheet">
+<script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" />"></script>
+<script src="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" />"></script>
 
 </head>
 <body>
 	<div class="container">
 		<div class="col-md-offset-2 col-md-7">
+			<div>
+			<h2>Add Category</h2>
+			<hr />
 			<div class="panel panel-info">
-			
+
 				<div class="panel-heading">
-					<div class="panel-title">Add category</div>
+					<div class="panel-title">Add Category Form</div>
 				</div>
 				<div class="panel-body">
-				
-					<form:form action="add" cssClass="form-horizontal"
+					<form:form action="save" cssClass="form-horizontal"
 						method="post" modelAttribute="category">
 						<form:hidden path="categoryId"/>
 						<div class="form-group">
-							<label for="categoryName" class="col-md-3 control-label">Name</label>
+							<label for="categoryName" class="col-md-3 control-label">Category Name</label>
 							<div class="col-md-9">
 								<form:input path="categoryName" cssClass="form-control" />
 							</div>
@@ -36,13 +37,14 @@
 						<div class="form-group">
 							<div class="col-md-offset-3 col-md-9">
 								<form:button cssClass="btn btn-primary">Submit</form:button>
+								<input type="button" value="Cancel" onclick="javascript:history.back()"/>
 							</div>
 						</div>
 					</form:form>
-					
 				</div>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

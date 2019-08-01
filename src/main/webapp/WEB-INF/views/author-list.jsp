@@ -4,24 +4,23 @@
 <html>
 <head>
 <title>Author Management</title>
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
- rel="stylesheet">
-<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<link href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />" rel="stylesheet">
+<script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" />"></script>
+<script src="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" />"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="col-md-offset-1 col-md-10">
+	<div class="container" >
+		<div>
 			<h2>Author Management</h2>
 			<hr />
 			<input type="button" value="Add Author"
-				onclick="window.location.href='showForm'; return false;"
+				onclick="window.location.href='add/form'; return false;"
 				class="btn btn-primary" />
 			<br/><br/>
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="panel-title">Author List</div>
-				</div>
+				</div>		
 				<div class="panel-body">
 					<table class="table msgtable-striped table-bordered">
 						<tr>
@@ -32,7 +31,7 @@
 							<c:forEach var="author" items="${authorList}">
 							
 								<!-- construct an "update" link with customer id -->
-								<c:url var="updateLink" value="/author/editForm">
+								<c:url var="updateLink" value="/author/update/form">
 									<c:param name="id" value="${author.authorId}" />
 								</c:url>
 	
@@ -50,6 +49,7 @@
 								</tr>
 							</c:forEach>
 					</table>
+					<a href="/">Back to Homepage</a>
 				</div>
 			</div>
 		</div>
