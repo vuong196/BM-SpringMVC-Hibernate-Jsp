@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity(name = "entity.Author")
-@Table(name = "author", catalog = "bookmanagement")
+@Table(name = "author", catalog = "dckkgcufb23jta")
 public class Author {
 
 	public Author() {
@@ -48,7 +48,7 @@ public class Author {
 		_authorName = authorName;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "_bookAuthor")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "_bookAuthor")
 	private Set<Book> _authorBookSet = new HashSet<>(0);
 
 	@Id

@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 @Entity(name = "entity.Category")
-@Table(name = "category", catalog = "bookmanagement")
+@Table(name = "category", catalog = "dckkgcufb23jta")
 public class Category {
 
 	public Category() {
@@ -23,7 +23,7 @@ public class Category {
 		return _categoryBookSet;
 	}
 
-	public String getCategoryId() {
+	public int getCategoryId() {
 
 		return _categoryId;
 	}
@@ -38,7 +38,7 @@ public class Category {
 		_categoryBookSet = categoryBookSet;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(int categoryId) {
 
 		_categoryId = categoryId;
 	}
@@ -48,13 +48,13 @@ public class Category {
 		_categoryName = categoryName;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "_bookCategorySet")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "_bookCategorySet")
 	private Set<Book> _categoryBookSet = new HashSet<>(0);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
-	private String _categoryId;
+	private int _categoryId;
 
 	@Column(name = "category_name", length = 50, nullable = false)
 	private String _categoryName;

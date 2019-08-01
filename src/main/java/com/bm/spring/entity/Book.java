@@ -16,13 +16,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity(name = "entity.Book")
-@Table(name = "book", catalog = "bookmanagement")
+@Table(name = "book", catalog = "dckkgcufb23jta")
 public class Book {
 
 	public Book() {
 	}
 
-	public int get_bookId() {
+	public int getBookId() {
 
 		return _bookId;
 	}
@@ -62,11 +62,11 @@ public class Book {
 		_bookName = bookName;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "author_id", nullable = false)
 	private Author _bookAuthor;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "book_category", catalog = "bookmanagement", joinColumns = {
 		@JoinColumn(name = "book_id", nullable = false, updatable = false)
 	}, inverseJoinColumns = {
