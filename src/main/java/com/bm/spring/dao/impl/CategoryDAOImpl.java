@@ -2,12 +2,15 @@
 package com.bm.spring.dao.impl;
 
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.bm.spring.dao.CategoryDAO;
 import com.bm.spring.entity.Category;
+
 @Repository
 public class CategoryDAOImpl implements CategoryDAO {
 
@@ -27,13 +30,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 
 	@Override
-	public void editCategory(Category Category) throws Exception {
-
-		Session session = _sessionFactory.getCurrentSession();
-		session.update(Category);
-	}
-
-	@Override
 	public Category getCategoryById(int id) throws Exception {
 
 		Session currentSession = _sessionFactory.getCurrentSession();
@@ -48,6 +44,13 @@ public class CategoryDAOImpl implements CategoryDAO {
 		Session session = _sessionFactory.getCurrentSession();
 		List<Category> CategoryList = session.createQuery("from " + Category.class.getName()).list();
 		return CategoryList;
+	}
+
+	@Override
+	public void updateCategory(Category Category) throws Exception {
+
+		Session session = _sessionFactory.getCurrentSession();
+		session.update(Category);
 	}
 
 	@Autowired

@@ -2,12 +2,15 @@
 package com.bm.spring.dao.impl;
 
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.bm.spring.dao.AuthorDAO;
 import com.bm.spring.entity.Author;
+
 @Repository
 public class AuthorDAOImpl implements AuthorDAO {
 
@@ -27,13 +30,6 @@ public class AuthorDAOImpl implements AuthorDAO {
 	}
 
 	@Override
-	public void editAuthor(Author author) throws Exception {
-
-		Session session = _sessionFactory.getCurrentSession();
-		session.update(author);
-	}
-
-	@Override
 	public Author getAuthorById(int id) throws Exception {
 
 		Session currentSession = _sessionFactory.getCurrentSession();
@@ -48,6 +44,13 @@ public class AuthorDAOImpl implements AuthorDAO {
 		Session session = _sessionFactory.getCurrentSession();
 		List<Author> authorList = session.createQuery("from " + Author.class.getName()).list();
 		return authorList;
+	}
+
+	@Override
+	public void updateAuthor(Author author) throws Exception {
+
+		Session session = _sessionFactory.getCurrentSession();
+		session.update(author);
 	}
 
 	@Autowired

@@ -2,11 +2,16 @@
 package com.bm.spring.dao.impl;
 
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.bm.spring.dao.BookDAO;
 import com.bm.spring.entity.Book;
+
+@Repository
 public class BookDAOImpl implements BookDAO {
 
 	@Override
@@ -25,13 +30,6 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public void editBook(Book Book) throws Exception {
-
-		Session session = _sessionFactory.getCurrentSession();
-		session.update(Book);
-	}
-
-	@Override
 	public Book getBookById(int id) throws Exception {
 
 		Session currentSession = _sessionFactory.getCurrentSession();
@@ -46,6 +44,13 @@ public class BookDAOImpl implements BookDAO {
 		Session session = _sessionFactory.getCurrentSession();
 		List<Book> BookList = session.createQuery("from " + Book.class.getName()).list();
 		return BookList;
+	}
+	
+	@Override
+	public void updateBook(Book Book) throws Exception {
+
+		Session session = _sessionFactory.getCurrentSession();
+		session.update(Book);
 	}
 
 	@Autowired
