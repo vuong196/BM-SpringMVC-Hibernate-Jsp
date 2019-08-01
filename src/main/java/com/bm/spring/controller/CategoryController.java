@@ -16,7 +16,7 @@ import com.bm.spring.service.CategoryService;
 @RequestMapping("/category")
 public class CategoryController {
 
-	@PostMapping("/add")
+	@PostMapping("/add/save")
 	public String addCategory(@ModelAttribute("category") Category category) throws Exception {
 
 		_categoryService.addCategory(category);
@@ -27,17 +27,17 @@ public class CategoryController {
 	public String deleteCustomer(@RequestParam("id") int id) throws Exception {
 
 		_categoryService.deleteCategory(id);
-		return "redirect:/Category/list";
-	}
-
-	@PostMapping("/edit")
-	public String editCategory(@ModelAttribute("category") Category category) throws Exception {
-
-		_categoryService.editCategory(category);
 		return "redirect:/category/list";
 	}
 
-	@GetMapping("/list")
+	@PostMapping("/update/save")
+	public String updateCategory(@ModelAttribute("category") Category category) throws Exception {
+
+		_categoryService.updateCategory(category);
+		return "redirect:/category/list";
+	}
+
+	@GetMapping({"/list" , ""})
 	public String getCategoryList(Model model) throws Exception {
 
 		List<Category> categoryList = _categoryService.getCategoryList();
@@ -45,7 +45,7 @@ public class CategoryController {
 		return "category-list";
 	}
 
-	@GetMapping("/showForm")
+	@GetMapping("/add/form")
 	public String showFormForAdd(Model model) throws Exception {
 
 		Category category = new Category();
@@ -53,12 +53,12 @@ public class CategoryController {
 		return "category-add";
 	}
 
-	@GetMapping("/editForm")
+	@GetMapping("/update/form")
 	public String showFormForUpdate(@RequestParam("id") int id, Model model) throws Exception {
 
 		Category category = _categoryService.getCategoryById(id);
 		model.addAttribute("category", category);
-		return "Category-edit";
+		return "category-edit";
 	}
 
 	@Autowired

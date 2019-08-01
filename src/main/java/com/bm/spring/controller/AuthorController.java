@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.bm.spring.entity.Author;
 import com.bm.spring.service.AuthorService;
+
 @Controller
 @RequestMapping("/author")
 public class AuthorController {
 
-	@PostMapping("/add")
+	@PostMapping("/add/save")
 	public String addAuthor(@ModelAttribute("author") Author author) throws Exception {
 
 		_authorService.addAuthor(author);
@@ -30,14 +31,14 @@ public class AuthorController {
 		return "redirect:/author/list";
 	}
 
-	@PostMapping("/edit")
-	public String editAuthor(@ModelAttribute("author") Author author) throws Exception {
+	@PostMapping("/update/save")
+	public String updateAuthor(@ModelAttribute("author") Author author) throws Exception {
 
-		_authorService.editAuthor(author);
+		_authorService.updateAuthor(author);
 		return "redirect:/author/list";
 	}
 
-	@GetMapping("/list")
+	@GetMapping({"/list" , ""})
 	public String getAuthorList(Model model) throws Exception {
 
 		List<Author> authorList = _authorService.getAuthorList();
@@ -45,7 +46,7 @@ public class AuthorController {
 		return "author-list";
 	}
 
-	@GetMapping("/showForm")
+	@GetMapping("/add/form")
 	public String showFormForAdd(Model model) throws Exception {
 
 		Author author = new Author();
@@ -53,14 +54,13 @@ public class AuthorController {
 		return "author-add";
 	}
 
-	@GetMapping("/editForm")
+	@GetMapping("/update/form")
 	public String showFormForUpdate(@RequestParam("id") int id, Model model) throws Exception {
 
 		Author author = _authorService.getAuthorById(id);
 		model.addAttribute("author", author);
 		return "author-edit";
 	}
-	
 
 	@Autowired
 	private AuthorService _authorService;

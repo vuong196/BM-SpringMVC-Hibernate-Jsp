@@ -20,7 +20,7 @@ import com.bm.spring.service.CategoryService;
 @RequestMapping("/book")
 public class BookController {
 
-	@PostMapping("/add")
+	@PostMapping("/add/save")
 	public String addBook(@ModelAttribute("book") Book book) throws Exception {
 
 		_bookService.addBook(book);
@@ -34,7 +34,7 @@ public class BookController {
 		return "redirect:/book/list";
 	}
 
-	@GetMapping("/list")
+	@GetMapping({"/list" , ""})
 	public String getBookList(Model model) throws Exception {
 
 		List<Book> bookList = _bookService.getBookList();
@@ -46,8 +46,14 @@ public class BookController {
 		return "book-list";
 	}
 
-	@PostMapping("/update")
-	@GetMapping("/showForm")
+	@PostMapping("/update/save")
+	public String updateBook(@ModelAttribute("book") Book book) throws Exception {
+
+		_bookService.updateBook(book);
+		return "redirect:/book/list";
+	}
+	
+	@GetMapping("/add/form")
 	public String showFormForAdd(Model model) throws Exception {
 
 		List<Author> authorList = _authorService.getAuthorList();
@@ -59,7 +65,7 @@ public class BookController {
 		return "book-add";
 	}
 
-	@GetMapping("/updateForm")
+	@GetMapping("/update/form")
 	public String showFormForUpdate(@RequestParam("id") int id, Model model) throws Exception {
 
 		List<Author> authorList = _authorService.getAuthorList();
@@ -70,13 +76,12 @@ public class BookController {
 		model.addAttribute("book", book);
 		return "book-edit";
 	}
-
-	public String updateBook(@ModelAttribute("book") Book book) throws Exception {
-
-		_bookService.editBook(book);
-		return "redirect:/book/list";
+	
+	@ModelAttribute("authors")
+	public List<Author> initializeAuthors() throws Exception {
+		return _authorService.getAuthorList();
 	}
-
+	
 	@Autowired
 	private AuthorService _authorService;
 
