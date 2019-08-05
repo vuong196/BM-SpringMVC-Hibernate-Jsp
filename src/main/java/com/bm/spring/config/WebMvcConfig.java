@@ -15,7 +15,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import com.bm.spring.converter.BookAuthorToAuthor;
-import com.bm.spring.converter.CategoriesToBookCategorySet;
+import com.bm.spring.converter.StringsToBookCategorySet;
+import com.bm.spring.converter.StringToBookCategorySet;
 
 @Configuration
 @EnableWebMvc
@@ -26,7 +27,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addFormatters(FormatterRegistry registry) {
 
 		registry.addConverter(_bookAuthorToAuthor);
-		registry.addConverter(_categoriesToBookCategorySet);
+		registry.addConverter(_stringsToBookCategorySet);
+		registry.addConverter(_stringToBookCategorySet);
 	}
 
 	@Override
@@ -57,5 +59,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	private BookAuthorToAuthor _bookAuthorToAuthor;
 
 	@Autowired
-	private CategoriesToBookCategorySet _categoriesToBookCategorySet;
+	private StringsToBookCategorySet _stringsToBookCategorySet;
+	
+	@Autowired
+	private StringToBookCategorySet _stringToBookCategorySet;
 }

@@ -14,7 +14,7 @@ import com.bm.spring.entity.Category;
 import com.bm.spring.service.CategoryService;
 
 @Component
-public class CategoriesToBookCategorySet implements Converter<String[], Set<Category>> {
+public class StringsToBookCategorySet implements Converter<String[], Set<Category>> {
 	
 	@Autowired
 	private CategoryService _categoryService;
@@ -25,6 +25,7 @@ public class CategoriesToBookCategorySet implements Converter<String[], Set<Cate
 		List<String> list = Arrays.asList((String[])arg0);
 		
 		Set<Category> categorySet = new HashSet<>(0);
+		
 		for (Object e : list) {
 			try {
 				categorySet.add(_categoryService.getCategoryById(Integer.parseInt((String) e)));
